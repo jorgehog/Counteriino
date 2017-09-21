@@ -8,23 +8,17 @@ def main():
         return res + 1
 
     def iterate(j, list, count):
-        if list == end:
-            return (True, list, count)
-
         if list[j] == max:
             list[j] = 0
             return iterate(j + 1, list, count)
         else:
             list[j] += 1
-            new_count = process(list, count)
-            return (False, list, new_count)
-
+            return (list, process(list, count))
 
     count = process(start, 0)
     list = start
-    done = False
-    while not done:
-        (done, list, count) = iterate(0, list, count)
+    while list != end:
+        (list, count) = iterate(0, list, count)
 
     print count, "values parsed"
 
