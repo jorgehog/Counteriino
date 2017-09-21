@@ -1,39 +1,32 @@
 def main():
-    start = [0, 0, 0, 0]
-    max = 3
+    start = [0,   0, 0, 0, 12, 13, 14]
+    end =   [15, 15, 3, 1, 12, 13, 14]
+    max = 15
 
-    def f(list, res):
+    def process(list, res):
         print "new list", list
         return res + 1
 
-    def check(j, list):
-        if j == len(list):
-            return (True, list)
+    def iterate(j, list, count):
+        if list == end:
+            return (True, list, count)
 
         if list[j] == max:
             list[j] = 0
-            return check(j + 1, list)
+            return iterate(j + 1, list, count)
         else:
             list[j] += 1
-            return (False, list)
+            new_count = process(list, count)
+            return (False, list, new_count)
 
-    def iterate(i, res, list):
-        new_res = f(list, res)
 
-        list[i] += 1
-        if list[i] > max:
-            list[i] = 0
-            done, list = check(i + 1, list)
-            if done:
-                return new_res
-            else:
-                return iterate(0, new_res, list)
-        else:
-            return iterate(i, new_res, list)
+    res = process(start, 0)
+    list = start
+    done = False
+    while not done:
+        (done, list, res) = iterate(0, list, res)
 
-    res = iterate(0, 0, start)
-
-    print res, "=?", (max+1)**len(start)
+    print res, "values parsed"
 
 if __name__ == '__main__':
     main()
