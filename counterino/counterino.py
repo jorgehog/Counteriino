@@ -1,26 +1,22 @@
+max = 15
+
+
+def iterate(list, j=0):
+    if list[j] == max:
+        list[j] = 0
+        return iterate(list, j + 1)
+    else:
+        list[j] += 1
+        return list
+
+
 def main():
-    start = [13, 12,  5, 0, 12, 13, 14]
-    end =   [15, 15,  3, 1, 12, 13, 14]
-    max = 15
+    now = [13, 12, 5, 0, 12, 13, 14]
+    end = [15, 15, 3, 1, 12, 13, 14]
 
-    def process(list, res):
-        print "new list", list
-        return res + 1
-
-    def iterate(j, list, count):
-        if list[j] == max:
-            list[j] = 0
-            return iterate(j + 1, list, count)
-        else:
-            list[j] += 1
-            return (list, process(list, count))
-
-    count = process(start, 0)
-    list = start
-    while list != end:
-        (list, count) = iterate(0, list, count)
-
-    print count, "values parsed"
+    while now != end:
+        now = iterate(now)
+        print "new list", now
 
 if __name__ == '__main__':
     main()
